@@ -7,11 +7,11 @@ import UnitsFilter from './UnitsFilter';
 const UnitsPage = () => {
   const list = useSelector((state: RootState) => state.units.list);
   const ageFilter = useSelector((state: RootState) => state.filters.ageFilter);
-
+  const filteredList = list.filter((unit) => unit.age >= ageFilter);
   return (
     <>
       <UnitsFilter></UnitsFilter>
-      <UnitsTable units={list}></UnitsTable>
+      <UnitsTable units={filteredList}></UnitsTable>
     </>
   );
 };

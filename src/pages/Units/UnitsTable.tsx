@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Unit } from '../../types';
+import { Unit, Ages } from '../../types';
 
 const useStyles = makeStyles({
   table: {
@@ -39,7 +39,7 @@ export default function UnitsTable({ units }: UnitsTableProps) {
                 {unit.id}
               </TableCell>
               <TableCell align="center">{unit.name}</TableCell>
-              <TableCell align="center">{unit.age}</TableCell>
+              <TableCell align="center">{Ages[unit.age]}</TableCell>
               <TableCell align="center">{JSON.stringify(unit.cost)}</TableCell>
             </TableRow>
           ))}

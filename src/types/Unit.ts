@@ -1,9 +1,9 @@
 export enum Ages {
-  All = 'ALL',
-  Dark = 'DARK',
-  Feudal = 'FEUDAL',
-  Castle = 'CASTLE',
-  Imperial = 'IMPERIAL',
+  All = 1,
+  Dark,
+  Feudal,
+  Castle,
+  Imperial,
 }
 
 export type Cost = {

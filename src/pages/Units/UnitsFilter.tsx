@@ -27,7 +27,7 @@ const UnitsFilter = () => {
   const dispatch = useDispatch();
   const ageFilter = useSelector((state: RootState) => state.filters.ageFilter);
   const unitCostFilter = useSelector((state: RootState) => state.filters.unitCostFilter);
-
+  console.log(Ages);
   const handleAgeClick = (age: Ages) => {
     dispatch(setAgeFilter(age));
   };
@@ -43,17 +43,23 @@ const UnitsFilter = () => {
   return (
     <div className={classes.root}>
       <ButtonGroup color="primary" size="large" aria-label="outlined primary button group">
-        {Object.keys(Ages).map((key) => (
-          <Button
-            key={key}
-            variant={Ages[key as keyof typeof Ages] === ageFilter ? 'contained' : 'outlined'}
-            onClick={() => {
-              handleAgeClick(Ages[key as keyof typeof Ages]);
-            }}
-          >
-            {key}
-          </Button>
-        ))}
+        {Object.keys(Ages).map((key) => {
+          if (isNaN(Number(key))) {
+            return (
+              <Button
+                key={key}
+                variant={Ages[key as keyof typeof Ages] === ageFilter ? 'contained' : 'outlined'}
+                onClick={() => {
+                  handleAgeClick(Ages[key as keyof typeof Ages]);
+                }}
+              >
+                {key}
+              </Button>
+            );
+          } else {
+            return null;
+          }
+        })}
       </ButtonGroup>
       {Object.entries(unitCostFilter).map(([key, value]: [string, Cost]) => (
         <FormControlLabel
