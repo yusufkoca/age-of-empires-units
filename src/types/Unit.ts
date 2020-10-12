@@ -6,16 +6,13 @@ export enum Ages {
   Imperial = 'IMPERIAL',
 }
 
-type Cost = {
+export type Cost = {
+  checked: boolean;
   min: number;
   max: number;
 };
 
-export type UnitCostFilter = {
-  Food?: Cost;
-  Wood?: Cost;
-  Gold?: Cost;
-};
+export type UnitCostFilter = { [index: string]: Cost };
 
 export type UnitCost = {
   Food?: number;

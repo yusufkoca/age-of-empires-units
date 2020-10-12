@@ -38,9 +38,9 @@ export default function UnitsTable({ units }: UnitsTableProps) {
               <TableCell component="th" scope="row">
                 {unit.id}
               </TableCell>
-              <TableCell align="right">{unit.name}</TableCell>
-              <TableCell align="right">{unit.age}</TableCell>
-              <TableCell align="right">{JSON.stringify(unit.cost)}</TableCell>
+              <TableCell align="center">{unit.name}</TableCell>
+              <TableCell align="center">{unit.age}</TableCell>
+              <TableCell align="center">{JSON.stringify(unit.cost)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
