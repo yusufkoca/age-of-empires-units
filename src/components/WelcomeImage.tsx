@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const WelcomeImage = () => {
   const classes = useStyles();
-  return <img src={HomePageImage} alt="Welcome Image" className={classes.image} />;
+  return <img src={HomePageImage} alt="Welcome to Age of Empires Units" className={classes.image} />;
 };
 
 export default WelcomeImage;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import primaryColor from '@material-ui/core/colors/teal';
