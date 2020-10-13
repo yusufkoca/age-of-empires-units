@@ -11,9 +11,9 @@ type defaultStateType = {
 const defaultState: defaultStateType = {
   ageFilter: Ages.All,
   unitCostFilter: {
-    Food: { checked: false, min: 0, max: 200 },
-    Wood: { checked: false, min: 0, max: 200 },
-    Gold: { checked: false, min: 0, max: 200 },
+    Food: { checked: false, range: [0, 200] },
+    Wood: { checked: false, range: [0, 200] },
+    Gold: { checked: false, range: [0, 200] },
   },
 };
 

@@ -8,17 +8,12 @@ export enum Ages {
 
 export type Cost = {
   checked: boolean;
-  min: number;
-  max: number;
+  range: [number, number];
 };
 
 export type UnitCostFilter = { [index: string]: Cost };
 
-export type UnitCost = {
-  Food?: number;
-  Wood?: number;
-  Gold?: number;
-};
+export type UnitCost = { [index: string]: number };
 
 export type Unit = {
   id: number;

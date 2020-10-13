@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import Slider from '@material-ui/core/Slider';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Ages, Cost } from '../../types';
+import { Ages, Cost, UnitCostFilter } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { setUnitCostFilter, setAgeFilter } from '../../store/filtersSlice';
@@ -19,27 +21,49 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(1),
       },
     },
+    slider: {
+      width: 'auto',
+      flexGrow: 1,
+    },
+    costFilter: {
+      width: '100%',
+      alignItems: 'center',
+      paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
+    },
   }),
 );
 
-const UnitsFilter = () => {
+type UnitsFilterProps = {
+  unitCostFilter: UnitCostFilter;
+};
+
+const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [slidersData, setSlidersData] = useState<UnitCostFilter>(unitCostFilter);
   const ageFilter = useSelector((state: RootState) => state.filters.ageFilter);
-  const unitCostFilter = useSelector((state: RootState) => state.filters.unitCostFilter);
-  console.log(Ages);
+
   const handleAgeClick = (age: Ages) => {
     dispatch(setAgeFilter(age));
   };
 
   const handleCheckboxClick = (key: string) => {
-    dispatch(
-      setUnitCostFilter({
-        ...unitCostFilter,
-        [key]: { ...unitCostFilter[key], checked: !unitCostFilter[key].checked },
-      }),
-    );
+    const newSlidersData = {
+      ...slidersData,
+      [key]: { ...slidersData[key], checked: !slidersData[key].checked },
+    };
+    setSlidersData(newSlidersData);
+    dispatch(setUnitCostFilter(newSlidersData));
   };
+
+  const handleSlidersDataChange = (key: string, value: [number, number]) => {
+    setSlidersData({
+      ...slidersData,
+      [key]: { ...slidersData[key], range: value },
+    });
+  };
+
   return (
     <div className={classes.root}>
       <ButtonGroup color="primary" size="large" aria-label="outlined primary button group">
@@ -61,22 +85,47 @@ const UnitsFilter = () => {
           }
         })}
       </ButtonGroup>
-      {Object.entries(unitCostFilter).map(([key, value]: [string, Cost]) => (
-        <FormControlLabel
-          key={key}
-          control={
-            <Checkbox
-              checked={value.checked}
-              onChange={() => {
-                handleCheckboxClick(key);
-              }}
-              name={key}
-              color="primary"
+      {slidersData &&
+        Object.entries(slidersData).map(([key, value]: [string, Cost]) => (
+          <FormGroup row key={key} className={classes.costFilter}>
+            <FormControlLabel
+              key={key}
+              control={
+                <Checkbox
+                  checked={value.checked}
+                  onChange={() => {
+                    handleCheckboxClick(key);
+                  }}
+                  name={key}
+                  color="primary"
+                />
+              }
+              label={key}
             />
-          }
-          label={key}
-        />
-      ))}
+            <Slider
+              min={0}
+              max={201}
+              disabled={!value.checked}
+              value={value.range}
+              onChange={(event, newValue: number[] | number) => {
+                let rangeValue: [number, number];
+                if (Array.isArray(newValue)) {
+                  rangeValue = [newValue[0], newValue[1]];
+                } else {
+                  rangeValue = [newValue, newValue];
+                }
+
+                handleSlidersDataChange(key, rangeValue);
+              }}
+              onChangeCommitted={(event, newValue: number[] | number) => {
+                dispatch(setUnitCostFilter(slidersData));
+              }}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              className={classes.slider}
+            />
+          </FormGroup>
+        ))}
     </div>
   );
 };

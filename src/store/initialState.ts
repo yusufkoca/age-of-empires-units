@@ -15,18 +15,26 @@ type initialStateType = {
 const initialState: initialStateType = {
   units: {
     list: jsonData.units.map((unit) => {
-      return { ...unit, age: Ages[unit.age as keyof typeof Ages] };
+      return {
+        ...unit,
+        age: Ages[unit.age as keyof typeof Ages],
+        cost: { ...{ Food: 0, Wood: 0, Gold: 0 }, ...unit.cost },
+      };
     }),
     filteredList: jsonData.units.map((unit) => {
-      return { ...unit, age: Ages[unit.age as keyof typeof Ages] };
+      return {
+        ...unit,
+        age: Ages[unit.age as keyof typeof Ages],
+        cost: { ...{ Food: 0, Wood: 0, Gold: 0 }, ...unit.cost },
+      };
     }),
   },
   filters: {
     ageFilter: Ages.All,
     unitCostFilter: {
-      Food: { checked: false, min: 0, max: 200 },
-      Wood: { checked: false, min: 0, max: 200 },
-      Gold: { checked: false, min: 0, max: 200 },
+      Food: { checked: false, range: [0, 200] },
+      Wood: { checked: false, range: [0, 200] },
+      Gold: { checked: false, range: [0, 200] },
     },
   },
 };
