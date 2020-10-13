@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import UnitsTable from './UnitsTable';
 import { RootState } from '../../store/rootReducer';
@@ -25,6 +25,10 @@ const UnitsPage: FunctionComponent = () => {
 
     return true;
   });
+
+  useEffect(() => {
+    document.title = 'Unit List';
+  }, []);
 
   return (
     <Container maxWidth={'md'}>

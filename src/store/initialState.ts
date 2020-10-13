@@ -4,7 +4,6 @@ import { Ages, Unit, UnitCostFilter } from '../types';
 type initialStateType = {
   units: {
     list: Unit[];
-    filteredList: Unit[];
   };
   filters: {
     ageFilter: Ages;
@@ -15,13 +14,6 @@ type initialStateType = {
 const initialState: initialStateType = {
   units: {
     list: jsonData.units.map((unit) => {
-      return {
-        ...unit,
-        age: Ages[unit.age as keyof typeof Ages],
-        cost: { ...{ Food: 0, Wood: 0, Gold: 0 }, ...unit.cost },
-      };
-    }),
-    filteredList: jsonData.units.map((unit) => {
       return {
         ...unit,
         age: Ages[unit.age as keyof typeof Ages],

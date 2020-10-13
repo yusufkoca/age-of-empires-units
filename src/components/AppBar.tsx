@@ -28,7 +28,7 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Home Page
+            Age of Empires Units
           </Typography>
           <Button color="inherit" component={Link} to="/">
             Home
