@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -34,13 +35,13 @@ export default function UnitsTable({ units }: UnitsTableProps) {
         </TableHead>
         <TableBody>
           {units.map((unit) => (
-            <TableRow key={unit.id}>
+            <TableRow key={unit.id} to={'/units/' + unit.id} component={Link}>
               <TableCell component="th" scope="row">
                 {unit.id}
               </TableCell>
               <TableCell align="center">{unit.name}</TableCell>
               <TableCell align="center">{Ages[unit.age]}</TableCell>
-              <TableCell align="center">{JSON.stringify(unit.cost)}</TableCell>
+              <TableCell align="center">{`Food: ${unit?.cost?.Food}, Wood: ${unit?.cost?.Wood}, Gold: ${unit?.cost?.Gold}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
