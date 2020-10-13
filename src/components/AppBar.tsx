@@ -30,10 +30,10 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Age of Empires Units
           </Typography>
-          <Button color="inherit" component={Link} to="/">
+          <Button color="inherit" component={Link} to="/" data-testid="home-page-link">
             Home
           </Button>
-          <Button color="inherit" component={Link} to="/units">
+          <Button color="inherit" component={Link} to="/units" data-testid="units-page-link">
             Units
           </Button>
         </Toolbar>
