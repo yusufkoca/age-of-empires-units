@@ -1,11 +1,12 @@
 import React from 'react';
-import HomePageImage from '../assets/home-page-image.png';
+import HomePageImage from '../assets/home-page-image-small.jpg';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     image: {
       maxWidth: '100%',
+      padding: theme.spacing(2),
     },
   }),
 );
