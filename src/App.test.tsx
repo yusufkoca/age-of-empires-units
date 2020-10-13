@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders app', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Age of Empires Units/i);
-  expect(linkElement).toBeInTheDocument();
+  const appTitle = getByText(/Age of Empires Units/i);
+  expect(appTitle).toBeInTheDocument();
 });
