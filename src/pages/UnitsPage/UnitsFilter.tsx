@@ -5,7 +5,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Slider from '@material-ui/core/Slider';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Ages, Cost, Resources, UnitCostFilter } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
@@ -40,6 +41,8 @@ type UnitsFilterProps = {
 
 const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const onMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const [slidersData, setSlidersData] = useState<UnitCostFilter>(unitCostFilter);
   const ageFilter = useSelector((state: RootState) => state.filters.ageFilter);
@@ -66,7 +69,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
 
   return (
     <div className={classes.root}>
-      <ButtonGroup color="primary" size="large" aria-label="outlined primary button group">
+      <ButtonGroup color="primary" size={onMobile ? 'small' : 'large'} aria-label="outlined primary button group">
         {Object.keys(Ages).map((key) => {
           if (isNaN(Number(key))) {
             return (
