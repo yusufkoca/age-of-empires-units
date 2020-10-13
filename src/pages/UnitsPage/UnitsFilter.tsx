@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Ages, Cost, UnitCostFilter } from '../../types';
+import { Ages, Cost, Resources, UnitCostFilter } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
 import { setUnitCostFilter, setAgeFilter } from '../../store/filtersSlice';
@@ -48,7 +48,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
     dispatch(setAgeFilter(age));
   };
 
-  const handleCheckboxClick = (key: string) => {
+  const handleCheckboxClick = (key: Resources) => {
     const newSlidersData = {
       ...slidersData,
       [key]: { ...slidersData[key], checked: !slidersData[key].checked },
@@ -57,7 +57,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
     dispatch(setUnitCostFilter(newSlidersData));
   };
 
-  const handleSlidersDataChange = (key: string, value: [number, number]) => {
+  const handleSlidersDataChange = (key: Resources, value: [number, number]) => {
     setSlidersData({
       ...slidersData,
       [key]: { ...slidersData[key], range: value },
@@ -94,7 +94,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
                 <Checkbox
                   checked={value.checked}
                   onChange={() => {
-                    handleCheckboxClick(key);
+                    handleCheckboxClick(Resources[key as keyof typeof Resources]);
                   }}
                   name={key}
                   color="primary"
@@ -115,9 +115,9 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
                   rangeValue = [newValue, newValue];
                 }
 
-                handleSlidersDataChange(key, rangeValue);
+                handleSlidersDataChange(Resources[key as keyof typeof Resources], rangeValue);
               }}
-              onChangeCommitted={(event, newValue: number[] | number) => {
+              onChangeCommitted={() => {
                 dispatch(setUnitCostFilter(slidersData));
               }}
               valueLabelDisplay="auto"

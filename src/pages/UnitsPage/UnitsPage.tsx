@@ -4,6 +4,7 @@ import UnitsTable from './UnitsTable';
 import { RootState } from '../../store/rootReducer';
 import UnitsFilter from './UnitsFilter';
 import { Container } from '@material-ui/core';
+import { Resources } from '../../types';
 
 const UnitsPage: FunctionComponent = () => {
   const list = useSelector((state: RootState) => state.units.list);
@@ -15,8 +16,11 @@ const UnitsPage: FunctionComponent = () => {
 
     if (unit.cost) {
       for (const item in unitCostFilter) {
-        if (unitCostFilter[item].checked) {
-          if (unit.cost[item] < unitCostFilter[item].range[0] || unit.cost[item] > unitCostFilter[item].range[1]) {
+        if (unitCostFilter[item as keyof typeof Resources].checked) {
+          if (
+            unit.cost[item as keyof typeof Resources] < unitCostFilter[item as keyof typeof Resources].range[0] ||
+            unit.cost[item as keyof typeof Resources] > unitCostFilter[item as keyof typeof Resources].range[1]
+          ) {
             return false;
           }
         }

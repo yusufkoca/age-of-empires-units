@@ -1,5 +1,5 @@
 import jsonData from '../assets/age-of-empires-units.json';
-import { Ages, Unit, UnitCostFilter } from '../types';
+import { Ages, Resources, Unit, UnitCostFilter } from '../types';
 
 type initialStateType = {
   units: {
@@ -24,9 +24,9 @@ const initialState: initialStateType = {
   filters: {
     ageFilter: Ages.All,
     unitCostFilter: {
-      Food: { checked: false, range: [0, 200] },
-      Wood: { checked: false, range: [0, 200] },
-      Gold: { checked: false, range: [0, 200] },
+      [Resources.Food]: { checked: false, range: [0, 200] },
+      [Resources.Wood]: { checked: false, range: [0, 200] },
+      [Resources.Gold]: { checked: false, range: [0, 200] },
     },
   },
 };

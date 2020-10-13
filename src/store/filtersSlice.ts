@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialState from './initialState';
 import { AppThunk } from './index';
-import { Ages, UnitCostFilter } from '../types';
+import { Ages, Resources, UnitCostFilter } from '../types';
 
 type defaultStateType = {
   ageFilter: Ages;
@@ -11,9 +11,9 @@ type defaultStateType = {
 const defaultState: defaultStateType = {
   ageFilter: Ages.All,
   unitCostFilter: {
-    Food: { checked: false, range: [0, 200] },
-    Wood: { checked: false, range: [0, 200] },
-    Gold: { checked: false, range: [0, 200] },
+    [Resources.Food]: { checked: false, range: [0, 200] },
+    [Resources.Wood]: { checked: false, range: [0, 200] },
+    [Resources.Gold]: { checked: false, range: [0, 200] },
   },
 };
 

@@ -6,14 +6,20 @@ export enum Ages {
   Imperial,
 }
 
+export enum Resources {
+  Food = 'Food',
+  Wood = 'Wood',
+  Gold = 'Gold',
+}
+
 export type Cost = {
   checked: boolean;
   range: [number, number];
 };
 
-export type UnitCostFilter = { [index: string]: Cost };
+export type UnitCostFilter = { [key in keyof typeof Resources]: Cost };
 
-export type UnitCost = { [index: string]: number };
+export type UnitCost = { [key in keyof typeof Resources]: number };
 
 export type Unit = {
   id: number;
