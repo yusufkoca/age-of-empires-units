@@ -57,7 +57,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
     dispatch(setUnitCostFilter(newSlidersData));
   };
 
-  const handleSlidersDataChange = (key: Resources, value: [number, number]) => {
+  const handleSlidersDataChange = (key: Resources, value: number[] | number) => {
     setSlidersData({
       ...slidersData,
       [key]: { ...slidersData[key], range: value },
@@ -104,18 +104,11 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
             />
             <Slider
               min={0}
-              max={201}
+              max={200}
               disabled={!value.checked}
-              value={value.range}
+              value={[value.range[0], value.range[1]]}
               onChange={(event, newValue: number[] | number) => {
-                let rangeValue: [number, number];
-                if (Array.isArray(newValue)) {
-                  rangeValue = [newValue[0], newValue[1]];
-                } else {
-                  rangeValue = [newValue, newValue];
-                }
-
-                handleSlidersDataChange(Resources[key as keyof typeof Resources], rangeValue);
+                handleSlidersDataChange(Resources[key as keyof typeof Resources], newValue);
               }}
               onChangeCommitted={() => {
                 dispatch(setUnitCostFilter(slidersData));

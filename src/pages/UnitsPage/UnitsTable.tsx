@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  tableRow: {
+    cursor: 'pointer',
+  },
 });
 
 type UnitsTableProps = {
@@ -22,6 +25,8 @@ type UnitsTableProps = {
 
 export default function UnitsTable({ units }: UnitsTableProps) {
   const classes = useStyles();
+  let history = useHistory();
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -35,7 +40,13 @@ export default function UnitsTable({ units }: UnitsTableProps) {
         </TableHead>
         <TableBody>
           {units.map((unit) => (
-            <TableRow key={unit.id} to={'/units/' + unit.id} component={Link}>
+            <TableRow
+              key={unit.id}
+              onClick={() => {
+                history.push('/units/' + unit.id);
+              }}
+              className={classes.tableRow}
+            >
               <TableCell component="th" scope="row">
                 {unit.id}
               </TableCell>
