@@ -54,7 +54,7 @@ export default function UnitsTable({ units }: UnitsTableProps) {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody data-testid={'units-table-body'}>
           {units.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((unit) => (
             <TableRow
               key={unit.id}

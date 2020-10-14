@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -35,15 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-type UnitsFilterProps = {
-  unitCostFilter: UnitCostFilter;
-};
-
-const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
+const UnitsFilter: FunctionComponent = () => {
   const classes = useStyles();
   const theme = useTheme();
   const onMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
+  const unitCostFilter = useSelector((state: RootState) => state.filters.unitCostFilter);
   const [slidersData, setSlidersData] = useState<UnitCostFilter>(unitCostFilter);
   const ageFilter = useSelector((state: RootState) => state.filters.ageFilter);
 
@@ -79,6 +76,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
                 onClick={() => {
                   handleAgeClick(Ages[key as keyof typeof Ages]);
                 }}
+                data-testid={'age-button-' + key}
               >
                 {key}
               </Button>
@@ -101,6 +99,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
                   }}
                   name={key}
                   color="primary"
+                  data-testid={'resources-checkbox-' + key}
                 />
               }
               label={key}
@@ -119,6 +118,7 @@ const UnitsFilter = ({ unitCostFilter }: UnitsFilterProps) => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               className={classes.slider}
+              data-testid={'resources-slider-' + key}
             />
           </FormGroup>
         ))}

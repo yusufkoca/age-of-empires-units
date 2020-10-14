@@ -41,6 +41,6 @@ export const setAgeFilter = (age: Ages): AppThunk => async (dispatch) => {
   dispatch(setAge(age));
 };
 
-export const setUnitCostFilter = (unitCost: UnitCostFilter): AppThunk => async (dispatch) => {
-  dispatch(setUnitCost(unitCost));
+export const setUnitCostFilter = (unitCostFilter: UnitCostFilter): AppThunk => async (dispatch) => {
+  dispatch(setUnitCost(unitCostFilter));
 };

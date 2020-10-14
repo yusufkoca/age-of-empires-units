@@ -1,18 +1,15 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import UnitsTable from './UnitsTable';
-import { RootState } from '../../store/rootReducer';
 import UnitsFilter from './UnitsFilter';
 import { Container, Typography } from '@material-ui/core';
 import useFilteredUnits from '../../hooks/useFilteredUnits';
 import Box from '@material-ui/core/Box';
 
 const UnitsPage: FunctionComponent = () => {
-  const unitCostFilter = useSelector((state: RootState) => state.filters.unitCostFilter);
   const filteredList = useFilteredUnits();
 
   useEffect(() => {
-    document.title = 'Unit List';
+    document.title = 'Units List';
   }, []);
 
   return (
@@ -22,7 +19,7 @@ const UnitsPage: FunctionComponent = () => {
           Units Page
         </Typography>
       </Box>
-      <UnitsFilter unitCostFilter={unitCostFilter} />
+      <UnitsFilter />
       <UnitsTable units={filteredList} />
     </Container>
   );

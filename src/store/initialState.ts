@@ -1,7 +1,7 @@
 import jsonData from '../assets/age-of-empires-units.json';
 import { Ages, Resources, Unit, UnitCostFilter } from '../types';
 
-type initialStateType = {
+export type initialStateType = {
   units: {
     list: Unit[];
   };
