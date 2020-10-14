@@ -1,17 +1,18 @@
 import React from 'react';
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
 import HomePage from './HomePage';
 
 test('renders home page', () => {
-  const { getByText, getByAltText } = render(<HomePage />);
-  const pageTitle = getByText(/Home Page/i);
+  render(<HomePage />);
+  const pageTitle = screen.getByText(/Home Page/i);
   expect(pageTitle).toBeInTheDocument();
 
-  const imageAltText = getByAltText(/Welcome to Age of Empires Units/i);
+  const imageAltText = screen.getByAltText(/Welcome to Age of Empires Units/i);
   expect(imageAltText).toBeInTheDocument();
 });
 
 test('changes document title', async () => {
   render(<HomePage />);
-  await wait(() => expect(document.title).toEqual('AeO Home'));
+  await waitFor(() => expect(document.title).toEqual('AeO Home'));
 });

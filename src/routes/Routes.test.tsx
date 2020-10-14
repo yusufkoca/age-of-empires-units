@@ -3,9 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
-
-import '@testing-library/jest-dom/extend-expect';
-
 import Routes from './Routes';
 import Layout from '../components/Layout';
 import { Provider } from 'react-redux';
@@ -17,7 +14,7 @@ test('full app rendering/navigating', () => {
     <Provider store={store}>
       <Router history={history}>
         <Layout>
-          <Routes></Routes>
+          <Routes />
         </Layout>
       </Router>
     </Provider>,
@@ -26,15 +23,14 @@ test('full app rendering/navigating', () => {
   // home page rendered
   expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
 
-  const leftClick = { button: 0 };
   // click to units page nav link
-  userEvent.click(screen.getByTestId('units-page-link'), leftClick);
+  userEvent.click(screen.getByTestId('units-page-link'));
 
   // units page rendered
   expect(screen.getByText(/Units Page/i)).toBeInTheDocument();
 
   // click to one of the units from the list
-  userEvent.click(screen.getByText('Archer'), leftClick);
+  userEvent.click(screen.getByText('Archer'));
   // unit details page rendered
   expect(screen.getByText(/Unit Details Page/i)).toBeInTheDocument();
 });
