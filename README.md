@@ -7,6 +7,7 @@ Demo Link -> https://age-of-empire-units.netlify.app/
 - React
 - Typescript
 - Material-UI
+- React Router
 - Redux
 - Redux Toolkit
 - Jest & testing-library
