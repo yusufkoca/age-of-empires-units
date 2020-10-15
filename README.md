@@ -1,3 +1,16 @@
+React App that lists, filters, and shows details of age of empires units given in a json file.
+
+Demo Link -> https://age-of-empire-units.netlify.app/
+
+## JS Stack
+
+- React
+- Typescript
+- Material-UI
+- Redux
+- Redux Toolkit
+- Jest & testing-library
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
